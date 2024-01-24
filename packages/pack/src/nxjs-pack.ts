@@ -45,7 +45,10 @@ const iconName = 'icon.jpg';
 try {
 	const iconUrl = new URL('icon.jpg', packageRoot);
 	const iconData = readFileSync(iconUrl);
-	icon = new Blob([iconData]);
+	const blob = new Blob([iconData]);
+	const iconNro = await NRO.decode(blob);
+
+	icon = iconNro.icon;
 	console.log(
 		`  Using ${chalk.bold(`"${iconName}"`)} file (${bytes(
 			icon.size
